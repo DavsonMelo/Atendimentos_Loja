@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_primary"
+    tools:context=".fragments.VendedorasFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10sp">
+
+            <TextView
+                android:id="@+id/txv_titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lista de vededoras da loja."
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:gravity="center"
+                android:fontFamily="@font/adlam_displayy"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/constraint" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardview"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:layout_marginTop="8dp"
+                android:padding="10sp"
+                app:cardCornerRadius="8sp"
+                app:cardElevation="5sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txv_titulo"
+                app:strokeColor="@color/black"
+                app:strokeWidth="5sp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/lv_vendedoras"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_salva_vendedora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/adlam_displayy"
+                android:text="Salvar"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:backgroundTint="@color/white"
+                app:layout_constraintEnd_toStartOf="@+id/btn_cancelar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardview"
+                app:cornerRadius="10sp"
+                app:strokeColor="@color/green"
+                app:strokeWidth="3sp"
+                android:foreground="?attr/selectableItemBackgroundBorderless" android:clickable="true"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_cancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:clickable="true"
+                android:fontFamily="@font/adlam_displayy"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:text="Cancelar"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:backgroundTint="@color/white"
+                app:cornerRadius="10sp"
+                app:layout_constraintEnd_toStartOf="@+id/btn_exclui_vendedora"
+                app:layout_constraintStart_toEndOf="@+id/btn_salva_vendedora"
+                app:layout_constraintTop_toBottomOf="@+id/cardview"
+                app:strokeColor="@color/green"
+                app:strokeWidth="3sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_exclui_vendedora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/adlam_displayy"
+                android:text="Excluir"
+                app:cornerRadius="10sp"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:backgroundTint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btn_cancelar"
+                app:layout_constraintTop_toBottomOf="@+id/cardview"
+                app:strokeColor="@color/green"
+                app:strokeWidth="3sp"
+                android:foreground="?attr/selectableItemBackgroundBorderless" android:clickable="true" />
+
+            <EditText
+                android:id="@+id/edit_text_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/custom_edittext_background"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:fontFamily="@font/adlam_displayy"
+                android:hint="ID:"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_cancelar" />
+
+            <EditText
+                android:id="@+id/edit_tex_nome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/custom_edittext_background"
+                android:fontFamily="@font/adlam_displayy"
+                android:hint="Nome completo:"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_id" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

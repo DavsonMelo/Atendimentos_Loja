@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_primary"
+    android:padding="20sp"
+    android:orientation="vertical"
+    tools:context=".fragments.VendedorasFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16sp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_salvar_conclusao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/adlam_display"
+            android:paddingHorizontal="30sp"
+            android:layout_marginStart="8sp"
+            android:text="Salvar"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:cornerRadius="7sp"
+            android:layout_weight="1"
+            app:strokeColor="@color/green"
+            app:strokeWidth="4sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cancelar_conclusao"
+            android:layout_weight="1"
+            android:layout_marginStart="30sp"
+            android:layout_marginEnd="8sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/adlam_display"
+            android:text="Cancelar"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:cornerRadius="7sp"
+            app:strokeColor="@color/green"
+            app:strokeWidth="4sp" />
+
+    </LinearLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_marginTop="40sp"
+        android:layout_height="600dp"
+        android:padding="20sp"
+        app:cardCornerRadius="8sp"
+        app:cardElevation="5sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:strokeColor="@color/black"
+        app:strokeWidth="5sp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20sp"
+            android:layout_marginTop="20sp"
+            android:layout_marginEnd="20sp"
+            android:layout_marginBottom="20sp"
+            android:orientation="vertical">
+
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/chk_conversao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16sp"
+                android:text="Marque se houve conversão"
+                android:fontFamily="@font/adlam_display"
+                android:textSize="20sp"/>
+
+            <EditText
+                android:id="@+id/edt_boleta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16sp"
+                android:ems="10"
+                android:hint="Número da Boleta"
+                android:fontFamily="@font/adlam_display"
+                android:textSize="20sp"
+
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/edt_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25sp"
+                android:ems="10"
+                android:hint="Deixe um feedback sobre seu atendimento..."
+                android:fontFamily="@font/adlam_display"
+                android:gravity="start|top"
+                android:textSize="20sp"
+                android:inputType="textMultiLine"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</LinearLayout>

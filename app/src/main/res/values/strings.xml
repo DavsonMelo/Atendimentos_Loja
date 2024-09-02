@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Organiza Vez</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tablayout">TabLayout</string>
+    <string name="name">Nome</string>
+    <string name="nome_completo">Nome Completo</string>
+    <string name="cargo">Cargo</string>
+    <string name="funcao">Função na loja</string>
+    <string name="foto">Foto</string>
+    <string name="buscar">Buscar</string>
+    <string name="excluir">Excluir</string>
+    <string name="salvar">Salvar</string>
+    <string name="foto_description">foto_description</string>
+    <string name="texto_spinner">Selecione uma opção</string>
+
+</resources>
