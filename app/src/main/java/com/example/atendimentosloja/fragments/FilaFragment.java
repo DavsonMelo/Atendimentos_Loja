@@ -35,7 +35,9 @@ import com.google.gson.Gson;
 
 import java.lang.reflect.Type;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -64,11 +66,25 @@ public class FilaFragment extends Fragment {
         setupSpinner(view);
         criarBotoes(view);
         criarBotoesPendentes(view);
+        //calculaTempoAtendimento();
 
         // Limpar fila e pendencia - manter comentado
         //funcaoLimpaTudo(view);
 
         return view;
+
+    }
+
+    private void calculaTempoAtendimento() {
+        // Criação do banco de dados e DAO
+        MyDatabase db = Room.databaseBuilder(getContext(), MyDatabase.class, "MeuBD").build();
+        AtendimentoDao atendimentoDao = db.atendimentoDao();
+
+        Executors.newSingleThreadExecutor().execute(() -> {
+            List<Atendimento> atendimentos = atendimentoDao.getAtendimentosPendentes();
+            // consertar primeiro como as datas sao armazenadas.
+
+        });
 
     }
 
@@ -228,9 +244,9 @@ public class FilaFragment extends Fragment {
 
                     btn_atender.setOnClickListener(atenderView -> {
                         // captura a data atual e coloca na string datetimeinicio
-                        long currentTimeMillis = System.currentTimeMillis();
-                        DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, Locale.getDefault());
-                        String datetimeinicio = dateFormat.format(new java.util.Date(currentTimeMillis));
+                            long currentTimeMillis = System.currentTimeMillis();
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
+                            String datetimeinicio = dateFormat.format(new Date(currentTimeMillis));
                         // Pega o nome que clicou em atender e coloca na variavel string vendedora
                         String vendedora = fila.get(0);
                         // Cria uma nova instancia de Atendimento
@@ -436,8 +452,8 @@ public class FilaFragment extends Fragment {
                         btn_salvar.setOnClickListener(salvarConclusaoView -> {
 
                             long currentTimeMillis = System.currentTimeMillis();
-                            DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, Locale.getDefault());
-                            String datetimefim = dateFormat.format(new java.util.Date(currentTimeMillis));
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
+                            String datetimefim = dateFormat.format(new Date(currentTimeMillis));
                             String nomeConclusao = nome;
 
                             boolean check = checkBox.isChecked();

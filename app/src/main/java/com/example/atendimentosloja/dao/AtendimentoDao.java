@@ -23,6 +23,9 @@ public interface AtendimentoDao {
     @Query("SELECT * FROM tab_atendimentos WHERE nomeAtendimento = :txt_nomeAtendimento AND dateFim IS NULL LIMIT 1")
     Atendimento findByName(String txt_nomeAtendimento);
 
+    @Query("SELECT * FROM tab_atendimentos WHERE dateFim IS NOT NULL AND tempoAtendimento IS NULL")
+    List<Atendimento> getAtendimentosPendentes();
+
     @Insert
     void insert(Atendimento atendimento);
 
