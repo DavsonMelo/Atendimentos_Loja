@@ -31,7 +31,7 @@ public class Atendimento implements Serializable {
     private Integer boleta;
 
     @ColumnInfo(name = "tempoAtendimento")  // Nova coluna com anotação
-    private Integer tempoAtendimento;
+    private Long tempoAtendimento;
 
     public Atendimento(){  }
 
@@ -91,11 +91,11 @@ public class Atendimento implements Serializable {
         this.boleta = boleta;
     }
 
-    public Integer getTempoAtendimento() {
+    public Long getTempoAtendimento() {
         return tempoAtendimento;
     }
 
-    public void setTempoAtendimento(Integer tempoAtendimento) {
+    public void setTempoAtendimento(Long tempoAtendimento) {
         this.tempoAtendimento = tempoAtendimento;
     }
 }

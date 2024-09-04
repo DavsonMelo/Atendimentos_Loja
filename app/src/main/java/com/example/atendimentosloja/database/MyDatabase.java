@@ -14,7 +14,7 @@ import com.example.atendimentosloja.dao.VendedoraDao;
 import com.example.atendimentosloja.entity.Atendimento;
 import com.example.atendimentosloja.entity.Vendedora;
 
-@Database(entities = {Vendedora.class, Atendimento.class}, version = 3, exportSchema = false)
+@Database(entities = {Vendedora.class, Atendimento.class}, version = 4, exportSchema = false)
 public abstract class MyDatabase extends RoomDatabase {
 
     public abstract VendedoraDao vendedoraDao();
@@ -22,8 +22,8 @@ public abstract class MyDatabase extends RoomDatabase {
 
     private static volatile MyDatabase INSTANCE;
 
-    // Definindo a migração da versão 2 para a versão 3
-    private static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+    // Definindo a migração da versão 3 para a versão 4
+    private static final Migration MIGRATION_3_4 = new Migration(3, 4) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
             // Comando SQL para adicionar a nova coluna
@@ -40,7 +40,7 @@ public abstract class MyDatabase extends RoomDatabase {
                                     MyDatabase.class,
                                     "MeuBD" // Nome do banco de dados
                             )
-                            .addMigrations(MIGRATION_2_3)  // Adiciona a migração correta
+                            .addMigrations(MIGRATION_3_4)  // Adiciona a migração correta
                             .build();
                 }
             }

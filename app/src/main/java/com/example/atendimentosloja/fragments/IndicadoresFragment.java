@@ -16,11 +16,13 @@ import com.example.atendimentosloja.R;
 import com.example.atendimentosloja.adapters.ChartVendedoraAdapter;
 import com.example.atendimentosloja.adapters.VendedoraAdapter;
 import com.example.atendimentosloja.database.MyDatabase;
+import com.example.atendimentosloja.entity.Atendimento;
 import com.example.atendimentosloja.entity.Vendedora;
 import com.example.atendimentosloja.utils.SpacingItemDecoration;
 import com.github.mikephil.charting.charts.PieChart;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class IndicadoresFragment extends Fragment {
@@ -49,6 +51,7 @@ public class IndicadoresFragment extends Fragment {
         // Observando mudanças na lista de vendedoras
         observarVendedoras();
 
+        calculaMediaEConversao();
 
         return view;
     }
@@ -75,5 +78,34 @@ public class IndicadoresFragment extends Fragment {
         });
         recyclerViewChart.setAdapter(adapter);
 
+    }
+
+    private void calculaMediaEConversao() {
+        db.vendedoraDao().getAll().observe(getViewLifecycleOwner(), vendedoras -> {
+            List<String> nomes = new ArrayList<>();
+            for (Vendedora vendedora : vendedoras) {
+                nomes.add(vendedora.getNome());
+            }
+
+            // Agora que você tem a lista de nomes, faça chamadas para obter dados
+            for (String nome : nomes) {
+                // Obtém total de tempo de atendimento
+                db.atendimentoDao().getTotalTempoAtendimentoForNomes(Collections.singletonList(nome))
+                        .observe(getViewLifecycleOwner(), totalTempo -> {
+                            if (totalTempo != null){
+                                Log.d("LogTeste", "Nome: " + nome + ", Tempo Total: " + totalTempo);
+                            }else {
+                                Log.d("LogTeste", "Nome: " + nome + ", Tempo Total: 0.0 (Nenhum atendimento encontrado)");
+                            }
+                        });
+
+                // Obtém contagem de conversões
+                db.atendimentoDao().getCountConversaoPorVendedora(nome)
+                        .observe(getViewLifecycleOwner(), countConversao -> {
+                            // Processa a contagem de conversões
+                            //Log.d("LogTeste", "Nome: " + nome + ", Conversões: " + countConversao);
+                        });
+            }
+        });
     }
 }

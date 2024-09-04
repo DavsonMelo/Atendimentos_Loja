@@ -25,6 +25,15 @@ public interface AtendimentoDao {
 
     @Query("SELECT * FROM tab_atendimentos WHERE dateFim IS NOT NULL AND tempoAtendimento IS NULL")
     List<Atendimento> getAtendimentosPendentes();
+    // Abaixo as querys para popular os dados da Indicadores
+    @Query("SELECT SUM(tempoAtendimento) FROM tab_atendimentos WHERE nomeAtendimento IN (:nomes)")
+    LiveData<Double> getTotalTempoAtendimentoForNomes(List<String> nomes);
+    //
+    @Query("SELECT COUNT(*) FROM tab_atendimentos WHERE nomeAtendimento IN (:nomes)")
+    LiveData<Integer> getCountAtendimentosForNomes(List<String> nomes);
+    //
+    @Query("SELECT COUNT(*) FROM tab_atendimentos WHERE conversao = 1 AND nomeAtendimento = :nome")
+    LiveData<Integer> getCountConversaoPorVendedora(String nome);
 
     @Insert
     void insert(Atendimento atendimento);

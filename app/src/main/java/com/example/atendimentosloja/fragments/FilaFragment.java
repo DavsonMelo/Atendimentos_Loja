@@ -41,6 +41,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class FilaFragment extends Fragment {
@@ -76,15 +77,39 @@ public class FilaFragment extends Fragment {
     }
 
     private void calculaTempoAtendimento() {
-        // Criação do banco de dados e DAO
-        MyDatabase db = Room.databaseBuilder(getContext(), MyDatabase.class, "MeuBD").build();
-        AtendimentoDao atendimentoDao = db.atendimentoDao();
+        // Obter uma instância do banco de dados
+        MyDatabase db = MyDatabase.getDatabase(getContext());
 
-        Executors.newSingleThreadExecutor().execute(() -> {
-            List<Atendimento> atendimentos = atendimentoDao.getAtendimentosPendentes();
-            // consertar primeiro como as datas sao armazenadas.
+        ExecutorService executor = Executors.newSingleThreadExecutor();
 
+        executor.execute(() -> {
+
+            List<Atendimento> atendimentos = db.atendimentoDao().getAtendimentosPendentes();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+                for (Atendimento atendimento : atendimentos){
+                    String dataInicio = atendimento.getDateInicio();
+                    String dataFim = atendimento.getDateFim();
+
+                    if (dataInicio != null && dataFim != null){
+                        try {
+                            Date inicio = sdf.parse(dataInicio);
+                            Date fim = sdf.parse(dataFim);
+
+                            long tempoEmMilissegundos = fim.getTime() - inicio.getTime();
+                            long tempoEmMinutos = tempoEmMilissegundos / (60 * 1000); // Conversão para minutos
+
+                            atendimento.setTempoAtendimento(tempoEmMinutos);
+
+                            db.atendimentoDao().update(atendimento);
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                }
         });
+
 
     }
 
@@ -501,6 +526,7 @@ public class FilaFragment extends Fragment {
                                         requireActivity().runOnUiThread(() -> {
                                             voltarPosicao(view, nome);
                                             dialogConcluir.dismiss();
+                                            calculaTempoAtendimento();
                                             // AQUI QUE O BICHO PEGA
 
                                         });
