@@ -22,10 +22,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
-import com.example.atendimentosloja.ButtonUtils;
-import com.example.atendimentosloja.PendenciaUtils;
+import com.example.atendimentosloja.utils.ButtonUtils;
+import com.example.atendimentosloja.utils.PendenciaUtils;
 import com.example.atendimentosloja.R;
-import com.example.atendimentosloja.Utils;
+import com.example.atendimentosloja.utils.Utils;
 import com.example.atendimentosloja.dao.AtendimentoDao;
 import com.example.atendimentosloja.database.MyDatabase;
 import com.example.atendimentosloja.entity.Atendimento;

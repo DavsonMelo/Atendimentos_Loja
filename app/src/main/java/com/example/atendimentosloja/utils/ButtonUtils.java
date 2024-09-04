@@ -1,4 +1,4 @@
-package com.example.atendimentosloja;
+package com.example.atendimentosloja.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,13 +10,10 @@ import android.widget.LinearLayout;
 
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.room.Room;
 
-import com.example.atendimentosloja.dao.AtendimentoDao;
-import com.example.atendimentosloja.database.MyDatabase;
+import com.example.atendimentosloja.R;
 
 import java.util.List;
-import java.util.concurrent.Executors;
 
 public class ButtonUtils {
 

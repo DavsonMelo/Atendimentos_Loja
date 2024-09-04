@@ -1,4 +1,4 @@
-package com.example.atendimentosloja;
+package com.example.atendimentosloja.utils;
 
 import android.graphics.Rect;
 import android.view.View;

@@ -5,18 +5,18 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.lifecycle.Observer;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
 import com.example.atendimentosloja.R;
-import com.example.atendimentosloja.SpacingItemDecoration;
-import com.example.atendimentosloja.Utils;
-import com.example.atendimentosloja.VendedoraAdapter;
+import com.example.atendimentosloja.utils.SpacingItemDecoration;
+import com.example.atendimentosloja.utils.Utils;
+import com.example.atendimentosloja.adapters.VendedoraAdapter;
 import com.example.atendimentosloja.database.MyDatabase;
 import com.example.atendimentosloja.entity.Vendedora;
 import java.util.ArrayList;

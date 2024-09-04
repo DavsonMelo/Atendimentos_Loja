@@ -1,4 +1,4 @@
-package com.example.atendimentosloja;
+package com.example.atendimentosloja.utils;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.atendimentosloja.R;
 
 public class Utils {
 

@@ -1,4 +1,4 @@
-package com.example.atendimentosloja;
+package com.example.atendimentosloja.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
