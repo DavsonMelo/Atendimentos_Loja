@@ -89,21 +89,22 @@ public class IndicadoresFragment extends Fragment {
 
             // Agora que você tem a lista de nomes, faça chamadas para obter dados
             for (String nome : nomes) {
-                // Obtém total de tempo de atendimento
-                db.atendimentoDao().getTotalTempoAtendimentoForNomes(Collections.singletonList(nome))
-                        .observe(getViewLifecycleOwner(), totalTempo -> {
-                            if (totalTempo != null){
-                                Log.d("LogTeste", "Nome: " + nome + ", Tempo Total: " + totalTempo);
-                            }else {
-                                Log.d("LogTeste", "Nome: " + nome + ", Tempo Total: 0.0 (Nenhum atendimento encontrado)");
-                            }
+                // Obtém total de atendimentos para um nome específico
+                db.atendimentoDao().getCountAtendimentosForNomes(Collections.singletonList(nome))
+                        .observe(getViewLifecycleOwner(), totalAtendimento -> {
+                            Log.d("LogTeste", "Nome: " + nome + ", Total de atendimentos: " + totalAtendimento);
                         });
 
-                // Obtém contagem de conversões
+                // Obtém o total de tempo de atendimento para um nome específico
+                db.atendimentoDao().getTotalTempoAtendimentoForNomes(Collections.singletonList(nome))
+                        .observe(getViewLifecycleOwner(), totalTempo -> {
+                            Log.d("LogTeste", "Nome: " + nome + ", Tempo Total: " + totalTempo);
+                        });
+
+                // Obtém o número de conversões para um nome específico
                 db.atendimentoDao().getCountConversaoPorVendedora(nome)
-                        .observe(getViewLifecycleOwner(), countConversao -> {
-                            // Processa a contagem de conversões
-                            //Log.d("LogTeste", "Nome: " + nome + ", Conversões: " + countConversao);
+                        .observe(getViewLifecycleOwner(), totalConversoes -> {
+                            Log.d("LogTeste", "Nome: " + nome + ", Conversões: " + totalConversoes);
                         });
             }
         });
