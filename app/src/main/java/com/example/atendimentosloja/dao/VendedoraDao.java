@@ -17,6 +17,10 @@ public interface VendedoraDao {
     @Query("SELECT * FROM tab_vendedoras") // Seleciona tudo da tabela tab_vendedoras
     LiveData<List<Vendedora>> getAll(); // Retorna todos os dados do bd. No caso, Nomes e ids
 
+    @Query("SELECT * FROM tab_vendedoras") // Seleciona tudo da tabela tab_vendedoras
+    List<Vendedora> getAllVendedoras(); // Retorna todos os dados do bd. No caso, Nomes e ids
+
+
     @Query("SELECT * FROM tab_vendedoras WHERE nome like :txt_nome limit 1")
     Vendedora findByName(String txt_nome); // Retorna lista de venddedores pelo nome
 

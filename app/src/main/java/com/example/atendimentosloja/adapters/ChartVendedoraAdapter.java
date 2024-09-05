@@ -4,58 +4,62 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.atendimentosloja.R;
-import com.example.atendimentosloja.entity.Vendedora;
+
 import java.util.List;
 
 public class ChartVendedoraAdapter extends RecyclerView.Adapter<ChartVendedoraAdapter.ChartVendedoraViewHolder> {
 
-    private List<Vendedora> vendedoraList;
+    private List<VendedoraData> vendedoraDataList;
     private OnItemClickListener listener;
 
-    // Interface para o clique no item
-    public interface OnItemClickListener {
-        void onItemClick(Vendedora vendedora);
-    }
-
-    // Construtor
-    public ChartVendedoraAdapter(List<Vendedora> vendedoraList, OnItemClickListener listener) {
-        this.vendedoraList = vendedoraList;
+    public ChartVendedoraAdapter(List<VendedoraData> vendedoraDataList) {
+        this.vendedoraDataList = vendedoraDataList;
         this.listener = listener;
     }
 
+    @NonNull
     @Override
-    public ChartVendedoraViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ChartVendedoraViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.chart_indicadores, parent, false); // Use o novo layout
+                .inflate(R.layout.chart_indicadores, parent, false);
         return new ChartVendedoraViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ChartVendedoraViewHolder holder, int position) {
-        Vendedora vendedora = vendedoraList.get(position);
-        holder.tvNomeVendedora.setText(vendedora.getNome());
+    public void onBindViewHolder(@NonNull ChartVendedoraViewHolder holder, int position) {
+        VendedoraData vendedoraData = vendedoraDataList.get(position);
 
-        holder.itemView.setOnClickListener(v -> listener.onItemClick(vendedora));
+        holder.tvNomeVendedora.setText(vendedoraData.getNome());
+        holder.tvMediaTempo.setText(String.format("Média tempo/atendimento: %.2f", vendedoraData.getMediaTempo())); // Ajuste o formato conforme necessário
+
+        holder.itemView.setOnClickListener(v -> listener.onItemClick(vendedoraData));
+
     }
 
     @Override
     public int getItemCount() {
-        return vendedoraList.size();
-    }
-
-    public void updateData(List<Vendedora> newData) {
-        this.vendedoraList = newData;
-        notifyDataSetChanged();
+        return vendedoraDataList.size();
     }
 
     public static class ChartVendedoraViewHolder extends RecyclerView.ViewHolder {
         TextView tvNomeVendedora;
+        TextView tvMediaTempo;
+
 
         public ChartVendedoraViewHolder(View itemView) {
             super(itemView);
-            tvNomeVendedora = itemView.findViewById(R.id.tvNomeVendedora); // Use o ID correspondente do novo layout
+            tvNomeVendedora = itemView.findViewById(R.id.tvNomeVendedora);
+            tvMediaTempo = itemView.findViewById(R.id.tvMediaTempo);
+
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(VendedoraData vendedoraData);
     }
 }

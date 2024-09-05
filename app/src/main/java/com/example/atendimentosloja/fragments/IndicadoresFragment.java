@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.atendimentosloja.R;
 import com.example.atendimentosloja.adapters.ChartVendedoraAdapter;
 import com.example.atendimentosloja.adapters.VendedoraAdapter;
+import com.example.atendimentosloja.adapters.VendedoraData;
 import com.example.atendimentosloja.database.MyDatabase;
 import com.example.atendimentosloja.entity.Atendimento;
 import com.example.atendimentosloja.entity.Vendedora;
@@ -22,8 +23,9 @@ import com.example.atendimentosloja.utils.SpacingItemDecoration;
 import com.github.mikephil.charting.charts.PieChart;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class IndicadoresFragment extends Fragment {
     private RecyclerView recyclerViewChart;
@@ -31,6 +33,8 @@ public class IndicadoresFragment extends Fragment {
     private PieChart pieChart;
     private ChartVendedoraAdapter adapter;
     private MyDatabase db;
+    private List<VendedoraData> vendedoraDataList = new ArrayList<>();
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,21 +49,14 @@ public class IndicadoresFragment extends Fragment {
         // Inicialização do banco de dados
         db = MyDatabase.getDatabase(requireContext());
 
-        // Configuração da UI
         configurarUI(view);
-
-        // Observando mudanças na lista de vendedoras
-        observarVendedoras();
-
-        calculaMediaEConversao();
 
         return view;
     }
-
-    private void observarVendedoras() {
-        db.vendedoraDao().getAll().observe(getViewLifecycleOwner(), (List<Vendedora> vendedoras) -> {
-            adapter.updateData(vendedoras);
-        });
+    @Override
+    public void onResume() {
+        super.onResume();
+        carregarDadosVendedoras();
     }
 
     private void configurarUI(View view) {
@@ -73,40 +70,39 @@ public class IndicadoresFragment extends Fragment {
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.item_spacing);
         recyclerViewChart.addItemDecoration(new SpacingItemDecoration(spacingInPixels));
 
-        adapter = new ChartVendedoraAdapter(new ArrayList<>(), vendedora -> {
-            tvNomeVendedora.setText(vendedora.getNome());
-        });
+        carregarDadosVendedoras();
+
+        adapter = new ChartVendedoraAdapter(vendedoraDataList);
         recyclerViewChart.setAdapter(adapter);
 
     }
 
-    private void calculaMediaEConversao() {
-        db.vendedoraDao().getAll().observe(getViewLifecycleOwner(), vendedoras -> {
-            List<String> nomes = new ArrayList<>();
-            for (Vendedora vendedora : vendedoras) {
-                nomes.add(vendedora.getNome());
-            }
+    private void carregarDadosVendedoras() {
+        Executor executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
 
-            // Agora que você tem a lista de nomes, faça chamadas para obter dados
-            for (String nome : nomes) {
-                // Obtém total de atendimentos para um nome específico
-                db.atendimentoDao().getCountAtendimentosForNomes(Collections.singletonList(nome))
-                        .observe(getViewLifecycleOwner(), totalAtendimento -> {
-                            Log.d("LogTeste", "Nome: " + nome + ", Total de atendimentos: " + totalAtendimento);
-                        });
+            List<Vendedora> vendedoras = db.vendedoraDao().getAllVendedoras();
+            vendedoraDataList.clear(); // Limpa a lista existente antes de adicionar os novos dados
 
-                // Obtém o total de tempo de atendimento para um nome específico
-                db.atendimentoDao().getTotalTempoAtendimentoForNomes(Collections.singletonList(nome))
-                        .observe(getViewLifecycleOwner(), totalTempo -> {
-                            Log.d("LogTeste", "Nome: " + nome + ", Tempo Total: " + totalTempo);
-                        });
+                for (Vendedora vendedora : vendedoras){
+                    String nome = vendedora.getNome();
+                    float media = calculaMedia(nome);
+                    vendedoraDataList.add(new VendedoraData(nome, media));
+                }
 
-                // Obtém o número de conversões para um nome específico
-                db.atendimentoDao().getCountConversaoPorVendedora(nome)
-                        .observe(getViewLifecycleOwner(), totalConversoes -> {
-                            Log.d("LogTeste", "Nome: " + nome + ", Conversões: " + totalConversoes);
-                        });
-            }
+                // Atualiza a lista na thread principal
+                getActivity().runOnUiThread(() -> {
+                    adapter.notifyDataSetChanged();
+                });
         });
     }
+
+    private float calculaMedia(String nome) {
+        Integer atendimentos = db.atendimentoDao().getCountAtendimentosForNomes(nome);
+        Integer tempoAtendimentos = db.atendimentoDao().getTotalTempoAtendimentoForNomes(nome);
+        tempoAtendimentos = (tempoAtendimentos != null) ? tempoAtendimentos : 0;
+
+        float media = (atendimentos > 0) ? (float) tempoAtendimentos / atendimentos : 0;
+
+        return (atendimentos > 0) ? (float) tempoAtendimentos / atendimentos : 0;    }
 }
