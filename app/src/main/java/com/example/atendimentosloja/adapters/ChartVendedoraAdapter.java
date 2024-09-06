@@ -1,6 +1,7 @@
 package com.example.atendimentosloja.adapters;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +25,18 @@ import java.util.List;
 public class ChartVendedoraAdapter extends RecyclerView.Adapter<ChartVendedoraAdapter.ChartVendedoraViewHolder> {
 
     private List<VendedoraData> vendedoraDataList;
+    private PieChart pieChart;
+
+
     private OnItemClickListener listener;
 
     public ChartVendedoraAdapter(List<VendedoraData> vendedoraDataList) {
         this.vendedoraDataList = vendedoraDataList;
         this.listener = listener;
+    }
+
+    public void setPieChart(PieChart pieChart) {
+        this.pieChart = pieChart;
     }
 
     @NonNull
@@ -47,50 +55,48 @@ public class ChartVendedoraAdapter extends RecyclerView.Adapter<ChartVendedoraAd
         holder.tvMediaTempo.setText(String.format("%.2f", vendedoraData.getMediaTempo())); // Ajuste o formato conforme necessário
         holder.itemView.setOnClickListener(v -> listener.onItemClick(vendedoraData));
 
+        List<PieEntry> pieEntries = vendedoraData.getPieEntries();
+
+        configurePieChart(holder.pieChart, pieEntries);
+
+
         // Configura o PieChart com valores estáticos
-        List<PieEntry> pieEntries = new ArrayList<>();
-        pieEntries.add(new PieEntry(40f, "Conversão"));
-        pieEntries.add(new PieEntry(60f, "Não"));
+        //List<PieEntry> pieEntries = new ArrayList<>();
+        //pieEntries.add(new PieEntry(40f, "Conversão"));
+        //pieEntries.add(new PieEntry(60f, "Não"));
+
+
+
+    }
+
+    private void configurePieChart(PieChart pieChart, List<PieEntry> pieEntries) {
 
         PieDataSet dataSet = new PieDataSet(pieEntries, "");
-        // Ajusta os valores dentro das fatias para sem casa decimal e com o simbolo %
         dataSet.setValueFormatter(new PercentFormatter());
-        // Ajuste o tamanho do texto dos valores
         dataSet.setValueTextSize(15f);
-        // Ajuste da cor dos valores no grafico pizza
         dataSet.setValueTextColor(Color.BLUE);
-        // nao sei
         dataSet.setDrawValues(true);
-        // nao sei
         dataSet.setDrawIcons(true);
-        // ajusta as cores do grafico pizza
         dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-        // nao sei
         dataSet.setDrawValues(true);
-        // seta as configurações no grafico pizza
         PieData pieData = new PieData(dataSet);
 
+        pieChart.setData(pieData);
+        pieChart.invalidate();
+        pieChart.setDrawHoleEnabled(false);
+        pieChart.setDrawEntryLabels(false);
+        pieChart.getDescription().setEnabled(true);
+
         // Configurando a legenda
-        Legend legend = holder.pieChart.getLegend();
-        legend.setEnabled(true);  // Habilita a exibição da legenda
-        legend.setTextSize(18f);  // Define o tamanho do texto da legenda
-        legend.setForm(Legend.LegendForm.SQUARE);  // Define o formato dos ícones (pode ser SQUARE, CIRCLE, ou LINE)
-        legend.setFormSize(12f);  // Aumenta o tamanho dos ícones (quadradinhos)
-        legend.setXEntrySpace(5f);  // Define o espaço entre as entradas da legenda
-        legend.setYEntrySpace(5f);  // Define o espaço vertical entre as entradas
-        legend.setWordWrapEnabled(true);  // Permite que a legenda seja quebrada se não couber na tela
+        Legend legend = pieChart.getLegend();
+        legend.setEnabled(true);
+        legend.setTextSize(18f);
+        legend.setForm(Legend.LegendForm.SQUARE);
+        legend.setFormSize(12f);
+        legend.setXEntrySpace(5f);
+        legend.setYEntrySpace(5f);
+        legend.setWordWrapEnabled(true);
         legend.setTextColor(Color.WHITE);
-
-        // Passa os valores para o meu pieChart
-        holder.pieChart.setData(pieData);
-        // Atualiza o gráfico
-        holder.pieChart.invalidate();
-        // Ajusta o grafico pizza para ser solido. Sem "buraco" no meio
-        holder.pieChart.setDrawHoleEnabled(false);
-        // Não sei
-        holder.pieChart.setDrawEntryLabels(false);
-        holder.pieChart.getDescription().setEnabled(true);
-
 
     }
 
@@ -102,7 +108,8 @@ public class ChartVendedoraAdapter extends RecyclerView.Adapter<ChartVendedoraAd
     public static class ChartVendedoraViewHolder extends RecyclerView.ViewHolder {
         TextView tvNomeVendedora;
         TextView tvMediaTempo;
-        PieChart pieChart;
+        PieChart pieChart; // Adicione essa linha
+
 
 
 
@@ -110,7 +117,8 @@ public class ChartVendedoraAdapter extends RecyclerView.Adapter<ChartVendedoraAd
             super(itemView);
             tvNomeVendedora = itemView.findViewById(R.id.tvNomeVendedora);
             tvMediaTempo = itemView.findViewById(R.id.tvMediaTempo);
-            pieChart = itemView.findViewById(R.id.pieChart);
+            pieChart = itemView.findViewById(R.id.pieChart); // Certifique-se de que o ID corresponde ao seu layout
+
 
         }
     }

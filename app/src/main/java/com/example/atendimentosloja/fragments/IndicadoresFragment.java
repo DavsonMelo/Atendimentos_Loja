@@ -21,6 +21,7 @@ import com.example.atendimentosloja.entity.Atendimento;
 import com.example.atendimentosloja.entity.Vendedora;
 import com.example.atendimentosloja.utils.SpacingItemDecoration;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +68,7 @@ public class IndicadoresFragment extends Fragment {
         carregarDadosVendedoras();
 
         adapter = new ChartVendedoraAdapter(vendedoraDataList);
+        adapter.setPieChart(pieChart); // Define o PieChart no adaptador
         recyclerViewChart.setAdapter(adapter);
 
     }
@@ -81,7 +83,9 @@ public class IndicadoresFragment extends Fragment {
                 for (Vendedora vendedora : vendedoras){
                     String nome = vendedora.getNome();
                     float media = calculaMedia(nome);
-                    vendedoraDataList.add(new VendedoraData(nome, media));
+                    List<PieEntry> pieEntries = getPieEntriesForVendedora(nome);
+                    //Log.d("LogTeste", "Pientries: " + pieEntries);
+                    vendedoraDataList.add(new VendedoraData(nome, media, pieEntries));
                 }
 
                 // Atualiza a lista na thread principal
@@ -99,6 +103,18 @@ public class IndicadoresFragment extends Fragment {
         float media = (atendimentos > 0) ? (float) tempoAtendimentos / atendimentos : 0;
 
         return (atendimentos > 0) ? (float) tempoAtendimentos / atendimentos : 0;    }
+
+    private List<PieEntry> getPieEntriesForVendedora(String nome) {
+        List<PieEntry> pieEntries = new ArrayList<>();
+
+        int atendimentos = db.atendimentoDao().getCountAtendimentosForNomes(nome); // Método fictício
+        int conversoes = db.atendimentoDao().getCountConversaoPorVendedora(nome); // Método fictício
+        int naoConversoes = atendimentos - conversoes;
+        pieEntries.add(new PieEntry(conversoes, "Conversões"));
+        pieEntries.add(new PieEntry(naoConversoes, "Não Conversões"));
+
+        return pieEntries;
+    }
 
 
 }
