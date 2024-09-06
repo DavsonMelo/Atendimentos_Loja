@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -28,17 +29,16 @@
                 android:gravity="center_vertical|start"
                 android:text="Nome da Vendedora"
                 android:textColor="@android:color/white"
-                android:textSize="18sp"
+                android:textSize="19sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <!-- Gráfico de Pizza no centro -->
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/pieChart"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="24dp"
                 android:layout_marginBottom="8dp"
                 android:layout_weight="1"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -46,6 +46,30 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <!-- Informação da média de tempo à direita -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="11dp"
+                android:fontFamily="@font/adlam_display"
+                android:text="Tempo medio\nAtendimento"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/tvMediaTempo"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/adlam_display"
+                android:text="minutos"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvMediaTempo" />
+
             <TextView
                 android:id="@+id/tvMediaTempo"
                 android:layout_width="wrap_content"
@@ -55,9 +79,9 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/adlam_display"
                 android:gravity="center_vertical|end"
-                android:text="Tempo Médio: 00:00"
+                android:text="00:00"
                 android:textColor="@android:color/white"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 

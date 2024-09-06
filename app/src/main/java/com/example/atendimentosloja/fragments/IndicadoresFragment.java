@@ -35,12 +35,6 @@ public class IndicadoresFragment extends Fragment {
     private MyDatabase db;
     private List<VendedoraData> vendedoraDataList = new ArrayList<>();
 
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -105,4 +99,6 @@ public class IndicadoresFragment extends Fragment {
         float media = (atendimentos > 0) ? (float) tempoAtendimentos / atendimentos : 0;
 
         return (atendimentos > 0) ? (float) tempoAtendimentos / atendimentos : 0;    }
+
+
 }
