@@ -21,7 +21,7 @@ public class ButtonUtils {
     public static Button createCustomButton(Context context, String nome, List<String> fila) {
         // Estilo padrão
         int strokeWidth = 5; // largura do stroke em pixels
-        int strokeColor = ContextCompat.getColor(context, R.color.color_primary); // cor do stroke (pode ser qualquer cor)
+        int strokeColor = ContextCompat.getColor(context, R.color.blue); // cor do stroke (pode ser qualquer cor)
 
         GradientDrawable normalDrawable = new GradientDrawable();
         normalDrawable.setShape(GradientDrawable.RECTANGLE);
@@ -49,7 +49,7 @@ public class ButtonUtils {
         params.setMargins(0, 26, 0, 26);
         button.setLayoutParams(params);
 
-        Typeface minhaFonte = ResourcesCompat.getFont(context, R.font.adlam_displayy);
+        Typeface minhaFonte = ResourcesCompat.getFont(context, R.font.roboto_flex1);
 
 
         button.setTextSize(20);

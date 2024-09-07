@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/color_primary"
+    android:background="@color/white"
     tools:context=".fragments.VendedorasFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -18,30 +18,17 @@
             android:layout_height="match_parent"
             android:padding="10sp">
 
-            <TextView
-                android:id="@+id/txv_titulo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Lista de vededoras da loja."
-                android:textColor="@color/white"
-                android:textSize="17sp"
-                android:gravity="center"
-                android:fontFamily="@font/adlam_displayy"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/constraint" />
-
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardview"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="71dp"
                 android:padding="10sp"
                 app:cardCornerRadius="8sp"
                 app:cardElevation="5sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txv_titulo"
+                app:layout_constraintTop_toTopOf="parent"
                 app:strokeColor="@color/black"
                 app:strokeWidth="5sp">
 
@@ -58,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
-                android:fontFamily="@font/adlam_displayy"
+                android:fontFamily="@font/roboto_flex1"
                 android:text="Salvar"
                 android:textColor="@color/black"
                 android:textSize="15sp"
@@ -81,7 +68,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:clickable="true"
-                android:fontFamily="@font/adlam_displayy"
+                android:fontFamily="@font/roboto_flex1"
                 android:foreground="?attr/selectableItemBackgroundBorderless"
                 android:text="Cancelar"
                 android:textColor="@color/black"
@@ -100,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
-                android:fontFamily="@font/adlam_displayy"
+                android:fontFamily="@font/roboto_flex1"
                 android:text="Excluir"
                 app:cornerRadius="10sp"
                 android:textColor="@color/black"
@@ -116,14 +103,14 @@
             <EditText
                 android:id="@+id/edit_text_id"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_height="20sp"
                 android:background="@drawable/custom_edittext_background"
                 android:clickable="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:fontFamily="@font/adlam_displayy"
+                android:fontFamily="@font/roboto_flex1"
                 android:hint="ID:"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_cancelar" />
@@ -132,9 +119,8 @@
                 android:id="@+id/edit_tex_nome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:background="@drawable/custom_edittext_background"
-                android:fontFamily="@font/adlam_displayy"
+                android:fontFamily="@font/roboto_flex1"
                 android:hint="Nome completo:"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

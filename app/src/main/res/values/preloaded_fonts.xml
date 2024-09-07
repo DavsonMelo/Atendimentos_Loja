@@ -2,5 +2,10 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/adlam_displayy</item>
+        <item>@font/roboto_flex1</item>
+        <item>@font/roboto_mono_thin</item>
+        <item>@font/roboto_serif_thin</item>
+        <item>@font/roboto_slab_thin</item>
+        <item>@font/roboto_thin</item>
     </array>
 </resources>

@@ -52,20 +52,12 @@ public class ChartVendedoraAdapter extends RecyclerView.Adapter<ChartVendedoraAd
         VendedoraData vendedoraData = vendedoraDataList.get(position);
 
         holder.tvNomeVendedora.setText(vendedoraData.getNome());
-        holder.tvMediaTempo.setText(String.format("%.2f", vendedoraData.getMediaTempo())); // Ajuste o formato conforme necessário
+        holder.tvMediaTempo.setText(String.format("%.0f", vendedoraData.getMediaTempo())); // Ajuste o formato conforme necessário
         holder.itemView.setOnClickListener(v -> listener.onItemClick(vendedoraData));
 
         List<PieEntry> pieEntries = vendedoraData.getPieEntries();
 
         configurePieChart(holder.pieChart, pieEntries);
-
-
-        // Configura o PieChart com valores estáticos
-        //List<PieEntry> pieEntries = new ArrayList<>();
-        //pieEntries.add(new PieEntry(40f, "Conversão"));
-        //pieEntries.add(new PieEntry(60f, "Não"));
-
-
 
     }
 
@@ -73,8 +65,8 @@ public class ChartVendedoraAdapter extends RecyclerView.Adapter<ChartVendedoraAd
 
         PieDataSet dataSet = new PieDataSet(pieEntries, "");
         dataSet.setValueFormatter(new PercentFormatter());
-        dataSet.setValueTextSize(15f);
-        dataSet.setValueTextColor(Color.BLUE);
+        dataSet.setValueTextSize(18f);
+        dataSet.setValueTextColor(Color.BLACK);
         dataSet.setDrawValues(true);
         dataSet.setDrawIcons(true);
         dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
@@ -83,20 +75,20 @@ public class ChartVendedoraAdapter extends RecyclerView.Adapter<ChartVendedoraAd
 
         pieChart.setData(pieData);
         pieChart.invalidate();
-        pieChart.setDrawHoleEnabled(false);
+        pieChart.setDrawHoleEnabled(true);
         pieChart.setDrawEntryLabels(false);
-        pieChart.getDescription().setEnabled(true);
+        pieChart.getDescription().setEnabled(false);
 
         // Configurando a legenda
         Legend legend = pieChart.getLegend();
         legend.setEnabled(true);
-        legend.setTextSize(18f);
+        legend.setTextSize(15f);
         legend.setForm(Legend.LegendForm.SQUARE);
         legend.setFormSize(12f);
         legend.setXEntrySpace(5f);
         legend.setYEntrySpace(5f);
         legend.setWordWrapEnabled(true);
-        legend.setTextColor(Color.WHITE);
+        legend.setTextColor(Color.BLACK);
 
     }
 

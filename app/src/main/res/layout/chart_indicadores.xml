@@ -10,7 +10,9 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/white"
+        app:strokeColor="@color/blue"
+        app:strokeWidth="5sp"
         app:cardCornerRadius="15sp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,11 +27,11 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/adlam_display"
+                android:fontFamily="@font/roboto_flex1"
                 android:gravity="center_vertical|start"
                 android:text="Nome da Vendedora"
-                android:textColor="@android:color/white"
-                android:textSize="19sp"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,6 +43,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/roboto_flex1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -51,10 +54,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="11dp"
-                android:fontFamily="@font/adlam_display"
+                android:fontFamily="@font/roboto_flex1"
                 android:text="Tempo medio\nAtendimento"
-                android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/tvMediaTempo"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -63,9 +66,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginBottom="8dp"
-                android:fontFamily="@font/adlam_display"
+                android:fontFamily="@font/roboto_flex1"
                 android:text="minutos"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tvMediaTempo" />
@@ -77,10 +80,10 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/adlam_display"
+                android:fontFamily="@font/roboto_flex1"
                 android:gravity="center_vertical|end"
-                android:text="00:00"
-                android:textColor="@android:color/white"
+                android:text="00"
+                android:textColor="@android:color/black"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

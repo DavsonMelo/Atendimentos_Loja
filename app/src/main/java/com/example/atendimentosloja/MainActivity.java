@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         // A linha abaixo modifica a cor do Status bar.
-        getWindow().setStatusBarColor(ContextCompat.getColor(MainActivity.this, R.color.color_primary));
+        getWindow().setStatusBarColor(ContextCompat.getColor(MainActivity.this, R.color.black));
 
         configTablayout();
     }

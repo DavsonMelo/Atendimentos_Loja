@@ -102,7 +102,8 @@ public class IndicadoresFragment extends Fragment {
 
         float media = (atendimentos > 0) ? (float) tempoAtendimentos / atendimentos : 0;
 
-        return (atendimentos > 0) ? (float) tempoAtendimentos / atendimentos : 0;    }
+        return (atendimentos > 0) ? Math.round(media) : 0;
+    }
 
     private List<PieEntry> getPieEntriesForVendedora(String nome) {
         List<PieEntry> pieEntries = new ArrayList<>();
@@ -111,7 +112,7 @@ public class IndicadoresFragment extends Fragment {
         int conversoes = db.atendimentoDao().getCountConversaoPorVendedora(nome); // Método fictício
         int naoConversoes = atendimentos - conversoes;
         pieEntries.add(new PieEntry(conversoes, "Conversões"));
-        pieEntries.add(new PieEntry(naoConversoes, "Não Conversões"));
+        pieEntries.add(new PieEntry(naoConversoes, "Não"));
 
         return pieEntries;
     }
