@@ -29,7 +29,7 @@
             android:textSize="18sp"
             app:cornerRadius="7sp"
             android:layout_weight="1"
-            app:strokeColor="@color/green"
+            app:strokeColor="@color/blue"
             app:strokeWidth="4sp" />
 
         <com.google.android.material.button.MaterialButton
@@ -46,7 +46,7 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             app:cornerRadius="7sp"
-            app:strokeColor="@color/green"
+            app:strokeColor="@color/blue"
             app:strokeWidth="4sp" />
 
     </LinearLayout>

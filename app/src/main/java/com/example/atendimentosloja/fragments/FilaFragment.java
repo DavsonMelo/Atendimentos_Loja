@@ -151,7 +151,14 @@ public class FilaFragment extends Fragment {
                         spinner.setSelection(0);  // Voltar para o placeholder
                     } else {
                         String selectedVendedora = nomes.get(position);
-                        adicionarVendedora(selectedVendedora);
+                        String nome = selectedVendedora;
+                        PendenciaUtils.checkPendencias(requireContext(), nome, hasPendencia -> {
+                            if (!hasPendencia){
+                                adicionarVendedora(selectedVendedora);
+                            }else {
+                                Utils.showToast(getContext(), "Esta vendedora tem pendências!");
+                            }
+                        });
 
                         new Handler().postDelayed(new Runnable() {
                             @Override

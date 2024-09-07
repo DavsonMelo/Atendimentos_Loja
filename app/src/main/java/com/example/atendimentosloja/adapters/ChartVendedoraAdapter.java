@@ -65,7 +65,7 @@ public class ChartVendedoraAdapter extends RecyclerView.Adapter<ChartVendedoraAd
 
         PieDataSet dataSet = new PieDataSet(pieEntries, "");
         dataSet.setValueFormatter(new PercentFormatter());
-        dataSet.setValueTextSize(18f);
+        dataSet.setValueTextSize(16f);
         dataSet.setValueTextColor(Color.BLACK);
         dataSet.setDrawValues(true);
         dataSet.setDrawIcons(true);

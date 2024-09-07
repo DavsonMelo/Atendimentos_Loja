@@ -108,9 +108,22 @@ public class IndicadoresFragment extends Fragment {
     private List<PieEntry> getPieEntriesForVendedora(String nome) {
         List<PieEntry> pieEntries = new ArrayList<>();
 
-        int atendimentos = db.atendimentoDao().getCountAtendimentosForNomes(nome); // Método fictício
-        int conversoes = db.atendimentoDao().getCountConversaoPorVendedora(nome); // Método fictício
-        int naoConversoes = atendimentos - conversoes;
+        int totalAtendimentos = db.atendimentoDao().getCountAtendimentosForNomes(nome);
+        int totalConversoes = db.atendimentoDao().getCountConversaoPorVendedora(nome);
+
+        int totalNaoConvertido = totalAtendimentos - totalConversoes;
+        int totalconvertido = totalConversoes;
+
+        // calcular percentual nao convertido
+        int percentNaoConvertido = (totalNaoConvertido * 100) / totalAtendimentos;
+        // calcular percentual convertido
+        int percentualConvertido = (totalconvertido * 100) / totalAtendimentos;
+
+
+        int conversoes = percentualConvertido;
+        int naoConversoes = percentNaoConvertido;
+
+
         pieEntries.add(new PieEntry(conversoes, "Conversões"));
         pieEntries.add(new PieEntry(naoConversoes, "Não"));
 

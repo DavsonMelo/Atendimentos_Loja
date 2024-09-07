@@ -54,7 +54,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardview"
                 app:cornerRadius="10sp"
-                app:strokeColor="@color/green"
+                app:strokeColor="@color/blue"
                 app:strokeWidth="3sp"
                 android:foreground="?attr/selectableItemBackgroundBorderless" android:clickable="true"
                 />
@@ -78,7 +78,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/btn_exclui_vendedora"
                 app:layout_constraintStart_toEndOf="@+id/btn_salva_vendedora"
                 app:layout_constraintTop_toBottomOf="@+id/cardview"
-                app:strokeColor="@color/green"
+                app:strokeColor="@color/blue"
                 app:strokeWidth="3sp" />
 
             <com.google.android.material.button.MaterialButton
@@ -96,7 +96,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btn_cancelar"
                 app:layout_constraintTop_toBottomOf="@+id/cardview"
-                app:strokeColor="@color/green"
+                app:strokeColor="@color/blue"
                 app:strokeWidth="3sp"
                 android:foreground="?attr/selectableItemBackgroundBorderless" android:clickable="true" />
 
