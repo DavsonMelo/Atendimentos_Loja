@@ -71,6 +71,11 @@ public class IndicadoresFragment extends Fragment {
         adapter.setPieChart(pieChart); // Define o PieChart no adaptador
         recyclerViewChart.setAdapter(adapter);
 
+        adapter.setOnItemClickListener(vendedoraData -> {
+            // Aqui você exibe o DialogFragment ao clicar no item da RecyclerView
+            VendedoraDetalhesDialogFragment dialogFragment = VendedoraDetalhesDialogFragment.newInstance(vendedoraData.getNome());
+            dialogFragment.show(getParentFragmentManager(), "VendedoraDetalhesDialogFragment");
+        });
     }
 
     private void carregarDadosVendedoras() {

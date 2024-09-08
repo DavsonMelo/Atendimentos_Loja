@@ -26,13 +26,19 @@ public class ChartVendedoraAdapter extends RecyclerView.Adapter<ChartVendedoraAd
 
     private List<VendedoraData> vendedoraDataList;
     private PieChart pieChart;
-
-
-    private OnItemClickListener listener;
+    private OnItemClickListener onItemClickListener;
 
     public ChartVendedoraAdapter(List<VendedoraData> vendedoraDataList) {
         this.vendedoraDataList = vendedoraDataList;
-        this.listener = listener;
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(VendedoraData vendedoraData);
     }
 
     public void setPieChart(PieChart pieChart) {
@@ -50,14 +56,18 @@ public class ChartVendedoraAdapter extends RecyclerView.Adapter<ChartVendedoraAd
     @Override
     public void onBindViewHolder(@NonNull ChartVendedoraViewHolder holder, int position) {
         VendedoraData vendedoraData = vendedoraDataList.get(position);
-
         holder.tvNomeVendedora.setText(vendedoraData.getNome());
         holder.tvMediaTempo.setText(String.format("%.0f", vendedoraData.getMediaTempo())); // Ajuste o formato conforme necessário
-        holder.itemView.setOnClickListener(v -> listener.onItemClick(vendedoraData));
-
+        //holder.itemView.setOnClickListener(v -> listener.onItemClick(vendedoraData));
+        // Configurando o clique no item
         List<PieEntry> pieEntries = vendedoraData.getPieEntries();
-
         configurePieChart(holder.pieChart, pieEntries);
+
+        holder.itemView.setOnClickListener(v -> {
+            if (onItemClickListener != null){
+                onItemClickListener.onItemClick(vendedoraData  );
+            }
+        });
 
     }
 
@@ -115,7 +125,4 @@ public class ChartVendedoraAdapter extends RecyclerView.Adapter<ChartVendedoraAd
         }
     }
 
-    public interface OnItemClickListener {
-        void onItemClick(VendedoraData vendedoraData);
-    }
 }
